@@ -128,104 +128,73 @@
 (defn beadgcf [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
-  (printf "\t%s\n" (Fn qp))
-  (printf "\t%s\n" (Cn qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (An qp))
-  (printf "\t%s\n" (En qp))
-  (printf "\t%s\n" (Bn qp))
+  (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn bfbfb [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
-  (printf "\t%s\n" (Bn qp))
-  (printf "\t%s\n" (Fn qp))
-  (printf "\t%s\n" (Bn qp))
-  (printf "\t%s\n" (Fn qp))
-  (printf "\t%s\n" (Bn qp))
+  (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn cgdae [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
-  (printf "\t%s\n" (En qp))
-  (printf "\t%s\n" (An qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Cn qp))
+  (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn dadgad [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (An qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (An qp))
-  (printf "\t%s\n" (Dn qp))
+  (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn dgdgbd [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (Bn qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Dn qp))
+  (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn eadgbe [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
-  (printf "\t%s\n" (En qp))
-  (printf "\t%s\n" (Bn qp))
-  (printf "\t%s\n" (Gn qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (An qp))
-  (printf "\t%s\n" (En qp))
+  (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 (defn fkbjdn [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (Bj qp))
-  (printf "\t%s\n" (Fk qp))
-  (printf "\t%s\n" (Dn qp))
-  (printf "\t%s\n" (Bj qp))
-  (printf "\t%s\n" (Fk qp))
+  (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
+    (doseq [i (range (count headstock))]
+      (printf "\t%s\n" (headstock i))))
   (prn))
 
 
 ;; browse pagewise
 (defn compendium []
   (doseq [clave accidentals]
-    (beadgcf clave)))
+    (eadgbe clave)))
 
 
 ;; menu layout
 (defn catalogue []
   (prn)
-  (doseq [clave accidentals]
-    (print (str "\t" clave))
-    (condp = clave
-      "j23"    (print "\n")
-      "j26"    (print "\n")
-      "j2k6"   (print "\n")
-      "j36"    (print "\n")
-      "j56y7"  (print "\n")
-      "k135x4" (print "\n")
-      "k1j6y7" (print "\n")
-      "k26"    (print "\n")
-      "k2j6"   (print "\n")
-      "k56x4"  (print "\n")
-      "n26y5"  (print "\n")
-      ()))
+  (doseq [clave (range (count accidentals))]
+    (if (zero? (mod (inc clave) 7))
+      (println (str "\t" (nth accidentals clave)))
+      (print (str "\t" (nth accidentals clave)))))
   (println "\n"))
 
 

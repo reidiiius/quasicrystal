@@ -6,14 +6,14 @@
 
 (if (= 0 (count arguments))
   ((fn []
-     (prn)
-     (icosahedrite.Lithophone/compendium)
-     (icosahedrite.Lithophone/catalogue)
-     (prn)))
+    (prn)
+    (icosahedrite.Lithophone/compendium)
+    (icosahedrite.Lithophone/catalogue)
+    (prn)))
   (if (contains? icosahedrite.Lithophone/monograph (first arguments))
     ((fn []
       (prn)
-      (icosahedrite.Lithophone/beadgcf (first arguments))
+      (icosahedrite.Lithophone/eadgbe (first arguments))
       (prn)))
     (icosahedrite.Lithophone/catalogue)))
 
