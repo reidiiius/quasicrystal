@@ -12,7 +12,9 @@ Tonality
 ### Usage
 command line
 
-    clojure src/icosahedrite/core.clj | less
+    cd quasicrystal/
+
+    clojure src/icosahedrite/core.clj | sensible-pager
 
     clojure src/icosahedrite/core.clj ?
 

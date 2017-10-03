@@ -1,0 +1,8 @@
+
+*~
+*.class
+classes
+*.jar
+.lein-*
+*.swp
+

@@ -128,7 +128,6 @@
 (defn beadgcf [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
-  (printf "\t%s\n" (Bj qp))
   (printf "\t%s\n" (Fn qp))
   (printf "\t%s\n" (Cn qp))
   (printf "\t%s\n" (Gn qp))
@@ -136,15 +135,80 @@
   (printf "\t%s\n" (An qp))
   (printf "\t%s\n" (En qp))
   (printf "\t%s\n" (Bn qp))
+  (prn))
+
+(defn bfbfb [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
+  (printf "\t%s\n" (Bn qp))
+  (printf "\t%s\n" (Fn qp))
+  (printf "\t%s\n" (Bn qp))
+  (printf "\t%s\n" (Fn qp))
+  (printf "\t%s\n" (Bn qp))
+  (prn))
+
+(defn cgdae [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
+  (printf "\t%s\n" (En qp))
+  (printf "\t%s\n" (An qp))
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (Gn qp))
+  (printf "\t%s\n" (Cn qp))
+  (prn))
+
+(defn dadgad [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (An qp))
+  (printf "\t%s\n" (Gn qp))
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (An qp))
+  (printf "\t%s\n" (Dn qp))
+  (prn))
+
+(defn dgdgbd [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (Bn qp))
+  (printf "\t%s\n" (Gn qp))
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (Gn qp))
+  (printf "\t%s\n" (Dn qp))
+  (prn))
+
+(defn eadgbe [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
+  (printf "\t%s\n" (En qp))
+  (printf "\t%s\n" (Bn qp))
+  (printf "\t%s\n" (Gn qp))
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (An qp))
+  (printf "\t%s\n" (En qp))
+  (prn))
+
+(defn fkbjdn [qp]
+  (prn)
+  (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (Bj qp))
+  (printf "\t%s\n" (Fk qp))
+  (printf "\t%s\n" (Dn qp))
+  (printf "\t%s\n" (Bj qp))
   (printf "\t%s\n" (Fk qp))
   (prn))
 
 
+;; browse pagewise
 (defn compendium []
   (doseq [clave accidentals]
     (beadgcf clave)))
 
 
+;; menu layout
 (defn catalogue []
   (prn)
   (doseq [clave accidentals]
