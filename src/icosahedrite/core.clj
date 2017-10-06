@@ -1,9 +1,9 @@
-(ns icosahedrite.core)
+(ns icosahedrite.core (:gen-class))
 
 (load-file "src/icosahedrite/Lithophone.clj")
 
-(defn -main [arguments]
-  (if (= 0 (count arguments))
+(defn -main [& arguments]
+  (if (= nil (first arguments))
     (do
       (prn)
       (icosahedrite.Lithophone/compendium)
@@ -17,6 +17,7 @@
       (icosahedrite.Lithophone/catalogue))))
 
 
-(-main *command-line-args*)
+;; comment out for leiningen
+(-main (first *command-line-args*))
 
 

@@ -90,7 +90,7 @@
 
 (def accidentals (keys (sort monograph)))
 
-(def horologium (.getTime (Date.)))
+(def horologium (str (.getTime (Date.))))
 
 
 ;; headstock methods
@@ -125,7 +125,7 @@
 
 ;; tuning methods
 
-(def finger-board (fn [pegs]
+(def fingerboard (fn [pegs]
   (doseq [pitch (range (count pegs))]
     (printf "\t%s\n" (pegs pitch)))))
 
@@ -133,49 +133,49 @@
   (prn)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
   (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn bfbfb [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
   (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn cgdae [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
   (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn dadgad [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
   (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn dgdgbd [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
   (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn eadgbe [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
   (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 (defn fkbjdn [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
   (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
-    (finger-board headstock))
+    (fingerboard headstock))
   (prn))
 
 

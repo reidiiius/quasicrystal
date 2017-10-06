@@ -11,5 +11,7 @@
     [org.clojure/clojure "1.4.0"]
   ]
   :min-lein-version "1.7.1"
-  :main icosahedrite.core)
+  :main icosahedrite.core
+  :aot [icosahedrite.core])
+
 
