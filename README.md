@@ -14,13 +14,15 @@ command line
 
     cd quasicrystal/
 
-    clojure src/icosahedrite/core.clj ?
+    lein uberjar
 
-    clojure src/icosahedrite/core.clj n0
+    java -jar quasicrystal-0.0.2-standalone.jar ?
 
-    clojure src/icosahedrite/core.clj j36
+    java -jar quasicrystal-0.0.2-standalone.jar n0
 
-    clojure src/icosahedrite/core.clj > resources/eadgbe.txt
+    java -jar quasicrystal-0.0.2-standalone.jar j36
+
+    java -jar quasicrystal-0.0.2-standalone.jar > resources/eadgbe.txt
 
     cat resources/eadgbe.txt | sensible-pager
 
