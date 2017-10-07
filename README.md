@@ -14,15 +14,11 @@ command line
 
     cd quasicrystal/
 
-    lein uberjar
+    clojure src/protolith/khatyrkite.clj ?
 
-    java -jar quasicrystal-0.0.2-standalone.jar ?
+    clojure src/protolith/khatyrkite.clj n0
 
-    java -jar quasicrystal-0.0.2-standalone.jar n0
-
-    java -jar quasicrystal-0.0.2-standalone.jar j36
-
-    java -jar quasicrystal-0.0.2-standalone.jar > resources/eadgbe.txt
+    clojure src/protolith/khatyrkite.clj > resources/eadgbe.txt
 
     cat resources/eadgbe.txt | sensible-pager
 
