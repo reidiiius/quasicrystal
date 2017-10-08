@@ -1,11 +1,20 @@
 (ns icosahedrite.Lithophone
   (:require [icosahedrite.core :as stelae]))
 
-(import java.util.Date)
 
 (def accidentals (keys (sort stelae/monograph)))
 
-(def horologium (str (.getTime (Date.))))
+(def horologium (str (System/currentTimeMillis)))
+
+
+;; menu layout
+(defn catalogue []
+  (prn)
+  (doseq [clave (range (count accidentals))]
+    (if (zero? (mod (inc clave) 7))
+      (println (str "\t" (nth accidentals clave)))
+      (print (str "\t" (nth accidentals clave)))))
+  (println "\n"))
 
 
 ;; headstock methods
@@ -47,50 +56,64 @@
 (defn beadgcf [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
-  (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn bfbfb [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
-  (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn cgdae [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
-  (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn dadgad [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
-  (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn dgdgbd [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
-  (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn eadgbe [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
-  (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 (defn fkbjdn [qp]
   (prn)
   (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
-  (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
-    (fingerboard headstock))
+  (try
+    (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
+      (fingerboard headstock))
+  (catch Exception _ (catalogue)))
   (prn))
 
 
@@ -98,15 +121,5 @@
 (defn compendium []
   (doseq [clave accidentals]
     (eadgbe clave)))
-
-
-;; menu layout
-(defn catalogue []
-  (prn)
-  (doseq [clave (range (count accidentals))]
-    (if (zero? (mod (inc clave) 7))
-      (println (str "\t" (nth accidentals clave)))
-      (print (str "\t" (nth accidentals clave)))))
-  (println "\n"))
 
 

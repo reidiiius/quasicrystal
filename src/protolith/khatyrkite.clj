@@ -1,8 +1,6 @@
 #!/usr/bin/env clojure
 (ns protolith.khatyrkite)
 
-(import java.util.Date)
-
 
 (def monograph {
        "j2", "HgHg PuFe ____ ____ CuNp PbAu ____ AuPb ____ AgUr ____ FePu "
@@ -93,7 +91,7 @@
 
 (def accidentals (keys (sort monograph)))
 
-(def horologium (str (.getTime (Date.))))
+(def horologium (str (System/currentTimeMillis)))
 
 
 ;; headstock methods

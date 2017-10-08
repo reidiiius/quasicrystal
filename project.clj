@@ -1,4 +1,4 @@
-(defproject quasicrystal "0.0.2"
+(defproject quasicrystal "0.0.3"
   :description "Tonality"
   :url "https://github.com/reidiiius/quasicrystal"
   :license {
