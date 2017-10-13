@@ -10,10 +10,10 @@
 ;; menu layout
 (defn catalogue []
   (prn)
-  (doseq [clave (range (count accidentals))]
-    (if (zero? (mod (inc clave) 7))
-      (println (str "\t" (nth accidentals clave)))
-      (print (str "\t" (nth accidentals clave)))))
+  (doseq [ndx (range (count accidentals))]
+    (if (zero? (mod (inc ndx) 7))
+      (println (str "\t" (nth accidentals ndx)))
+      (print (str "\t" (nth accidentals ndx)))))
   (println "\n"))
 
 

@@ -189,28 +189,44 @@
 ;; menu layout
 (defn catalogue []
   (prn)
-  (doseq [clave (range (count accidentals))]
-    (if (zero? (mod (inc clave) 7))
-      (println (str "\t" (nth accidentals clave)))
-      (print (str "\t" (nth accidentals clave)))))
+  (doseq [ndx (range (count accidentals))]
+    (if (zero? (mod (inc ndx) 7))
+      (println (str "\t" (nth accidentals ndx)))
+      (print (str "\t" (nth accidentals ndx)))))
   (println "\n"))
 
 
-(defn -main [& arguments]
-  (if (= nil (first arguments))
-    (do
-      (prn)
-      (compendium)
-      (catalogue)
-      (prn))
-    (if (contains? monograph (first arguments))
-      (do
-        (prn)
-        (eadgbe (first arguments))
-        (prn))
-      (catalogue))))
+(defn -main [arguments]
+  (when (= nil arguments)
+    (prn)
+    (compendium)
+    (catalogue)
+    (prn))
+  (when (= clojure.lang.ArraySeq (type arguments))
+    (cond
+      (= "$" (first arguments))
+        (do
+          (prn)
+          (compendium)
+          (prn)) 
+      (= "?" (first arguments))
+        (do
+          (prn)
+          (catalogue)
+          (prn))
+      :otherwise
+        (do
+          (prn)
+          (doseq [signat arguments]
+            (if (contains? monograph signat)
+              (eadgbe signat)
+              (do
+                (if (< 1 (count arguments))
+                  (printf "\n\t%s %s\n\n" signat "?")
+                  (catalogue)))))
+          (prn)))))
 
 
-(-main (first *command-line-args*))
+(-main *command-line-args*)
 
 
