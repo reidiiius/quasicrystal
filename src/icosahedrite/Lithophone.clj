@@ -2,49 +2,61 @@
   (:require [icosahedrite.core :as stelae]))
 
 
-(def accidentals (keys (sort stelae/monograph)))
+;; utility receptacles
+
+(def accidentals (sort (keys stelae/monograph)))
 
 (def horologium (str (System/currentTimeMillis)))
 
 
 ;; menu layout
-(defn catalogue []
-  (prn)
-  (doseq [ndx (range (count accidentals))]
+
+(defn catahoula-cur [scent swamp]
+  (filter string?
+    (map (fn [qp] (re-matches scent qp)) swamp)))
+
+(defn catalogue [specie]
+  (newline)
+  (doseq [ndx (range (count specie))]
     (if (zero? (mod (inc ndx) 7))
-      (println (str "\t" (nth accidentals ndx)))
-      (print (str "\t" (nth accidentals ndx)))))
+      (println (str "\t" (nth specie ndx)))
+      (print (str "\t" (nth specie ndx)))))
   (println "\n"))
 
 
 ;; headstock methods
 
+(defn chromograph [qp ndx]
+  (str
+    (subs (get stelae/monograph (str qp)) ndx 60)
+    (subs (get stelae/monograph (str qp)) 0 ndx)))
+
 (defn Bj [qp]
-  (str (subs (get stelae/monograph qp) 50 60) (subs (get stelae/monograph qp) 0 50)))
+  (chromograph qp 50))
 
 (defn Fn [qp]
-  (str (subs (get stelae/monograph qp) 25 60) (subs (get stelae/monograph qp) 0 25)))
+  (chromograph qp 25))
 
 (defn Cn [qp]
-  (get stelae/monograph qp))
+  (get stelae/monograph (str qp)))
 
 (defn Gn [qp]
-  (str (subs (get stelae/monograph qp) 35 60) (subs (get stelae/monograph qp) 0 35)))
+  (chromograph qp 35))
 
 (defn Dn [qp]
-  (str (subs (get stelae/monograph qp) 10 60) (subs (get stelae/monograph qp) 0 10)))
+  (chromograph qp 10))
 
 (defn An [qp]
-  (str (subs (get stelae/monograph qp) 45 60) (subs (get stelae/monograph qp) 0 45)))
+  (chromograph qp 45))
 
 (defn En [qp]
-  (str (subs (get stelae/monograph qp) 20 60) (subs (get stelae/monograph qp) 0 20)))
+  (chromograph qp 20))
 
 (defn Bn [qp]
-  (str (subs (get stelae/monograph qp) 55 60) (subs (get stelae/monograph qp) 0 55)))
+  (chromograph qp 55))
 
 (defn Fk [qp]
-  (str (subs (get stelae/monograph qp) 30 60) (subs (get stelae/monograph qp) 0 30)))
+  (chromograph qp 30))
 
 
 ;; tuning methods
@@ -54,70 +66,71 @@
     (printf "\t%s\n" (pegs pitch)))))
 
 (defn beadgcf [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
   (try
     (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn bfbfb [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
   (try
     (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn cgdae [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
   (try
     (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn dadgad [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
   (try
     (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn dgdgbd [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
   (try
     (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn eadgbe [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
   (try
     (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 (defn fkbjdn [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
   (try
     (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
       (fingerboard headstock))
-  (catch Exception _ (catalogue)))
+  (catch Exception _ (catalogue accidentals)))
   (prn))
 
 
 ;; browse pagewise
+
 (defn compendium []
   (doseq [clave accidentals]
     (eadgbe clave)))

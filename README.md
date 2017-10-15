@@ -18,6 +18,8 @@ command line
 
     clojure src/protolith/khatyrkite.clj n0
 
+    clojure src/protolith/khatyrkite.clj k6 j5
+
     clojure src/protolith/khatyrkite.clj > resources/eadgbe.txt
 
     cat resources/eadgbe.txt | sensible-pager

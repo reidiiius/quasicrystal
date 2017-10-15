@@ -2,6 +2,8 @@
 (ns protolith.khatyrkite)
 
 
+;; data store
+
 (def monograph {
        "j2", "HgHg PuFe ____ ____ CuNp PbAu ____ AuPb ____ AgUr ____ FePu "
        "j3", "HgSn ____ SnHg UrFe ____ PbAg ____ AuAu ____ AgPb ____ FeUr "
@@ -44,7 +46,6 @@
      "n345", "____ PuFe ____ ____ CuNp PbAu ____ AuPb NpCu ____ TiSn FePu "
      "n5y2", "HgMn ____ ____ MnHg CuFe ____ ____ AuNp NpAu ____ TiPb FeCu "
      "n6x2", "FeCu HgMn ____ ____ MnHg CuFe PbTi ____ AuNp NpAu ____ ____ "
-    "j17k2", "____ ____ ____ MnFe CuTi PbAg ____ AuAu ____ AgPb TiCu FeMn "
     "j17y2", "HgAg ____ ____ ____ CuPb PbCu ____ AuSn ____ AgHg TiFe FeTi "
     "j23k6", "HgHg PuFe ____ UrAg ____ PbAu ____ AuPb ____ ____ TiSn FePu "
     "j25y6", "TiCu FeMn ____ ____ SnHg MnFe CuTi PbAg ____ ____ ____ AgPb "
@@ -55,6 +56,7 @@
     "j56y7", "UrCu ____ PbSn ____ AuHg NpFe AgTi ____ FeNp HgAu ____ ____ "
     "k12j5", "____ AgUr ____ FePu HgHg PuFe SnTi ____ ____ PbAu ____ AuPb "
     "k17j5", "TiCu FeMn HgSn ____ SnHg MnFe CuTi ____ ____ AuAu ____ ____ "
+    "k2j17", "____ ____ ____ MnFe CuTi PbAg ____ AuAu ____ AgPb TiCu FeMn "
     "k25x1", "____ ____ TiSn FePu HgHg PuFe ____ ____ CuNp PbAu ____ AuPb "
     "k26x5", "HgSn ____ ____ MnFe CuTi PbAg ____ ____ ____ AgPb TiCu FeMn "
     "k2j56", "NpCu ____ ____ FePu HgHg PuFe SnTi ____ CuNp ____ ____ AuPb "
@@ -89,39 +91,61 @@
 })
 
 
-(def accidentals (keys (sort monograph)))
+;; utility receptacles
+
+(def accidentals (sort (keys monograph)))
 
 (def horologium (str (System/currentTimeMillis)))
 
 
+;; menu layout
+
+(defn catahoula-cur [scent swamp]
+  (filter string?
+    (map (fn [qp] (re-matches scent qp)) swamp)))
+
+(defn catalogue [specie]
+  (newline)
+  (doseq [ndx (range (count specie))]
+    (if (zero? (mod (inc ndx) 7))
+      (println (str "\t" (nth specie ndx)))
+      (print (str "\t" (nth specie ndx)))))
+  (println "\n"))
+
+
 ;; headstock methods
 
+(defn chromograph [qp ndx]
+  (str
+    (subs (get monograph (str qp)) ndx 60)
+    (subs (get monograph (str qp)) 0 ndx)))
+
 (defn Bj [qp]
-  (str (subs (get monograph qp) 50 60) (subs (get monograph qp) 0 50)))
+  (chromograph qp 50))
 
 (defn Fn [qp]
-  (str (subs (get monograph qp) 25 60) (subs (get monograph qp) 0 25)))
+  (chromograph qp 25))
 
 (defn Cn [qp]
-  (get monograph qp))
+  (get monograph (str qp)))
 
 (defn Gn [qp]
-  (str (subs (get monograph qp) 35 60) (subs (get monograph qp) 0 35)))
+  (chromograph qp 35))
 
 (defn Dn [qp]
-  (str (subs (get monograph qp) 10 60) (subs (get monograph qp) 0 10)))
+  (chromograph qp 10))
 
 (defn An [qp]
-  (str (subs (get monograph qp) 45 60) (subs (get monograph qp) 0 45)))
+  (chromograph qp 45))
 
 (defn En [qp]
-  (str (subs (get monograph qp) 20 60) (subs (get monograph qp) 0 20)))
+  (chromograph qp 20))
 
 (defn Bn [qp]
-  (str (subs (get monograph qp) 55 60) (subs (get monograph qp) 0 55)))
+  (chromograph qp 55))
 
 (defn Fk [qp]
-  (str (subs (get monograph qp) 30 60) (subs (get monograph qp) 0 30)))
+  (chromograph qp 30))
 
 
 ;; tuning methods
@@ -131,49 +155,49 @@
     (printf "\t%s\n" (pegs pitch)))))
 
 (defn beadgcf [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-beadgcf-sv" horologium)
   (let [headstock [(Fn qp) (Cn qp) (Gn qp) (Dn qp) (An qp) (En qp) (Bn qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn bfbfb [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-bfbfb-sv" horologium)
   (let [headstock [(Bn qp) (Fn qp) (Bn qp) (Fn qp) (Bn qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn cgdae [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-cgdae-sv" horologium)
   (let [headstock [(En qp) (An qp) (Dn qp) (Gn qp) (Cn qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn dadgad [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-dadgad-sv" horologium)
   (let [headstock [(Dn qp) (An qp) (Gn qp) (Dn qp) (An qp) (Dn qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn dgdgbd [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-dgdgbd-sv" horologium)
   (let [headstock [(Dn qp) (Bn qp) (Gn qp) (Dn qp) (Gn qp) (Dn qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn eadgbe [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-eadgbe-sv" horologium)
   (let [headstock [(En qp) (Bn qp) (Gn qp) (Dn qp) (An qp) (En qp)]]
     (fingerboard headstock))
   (prn))
 
 (defn fkbjdn [qp]
-  (prn)
+  (newline)
   (printf "\t%s%s%s\n" qp "-fkbjdn-sv" horologium)
   (let [headstock [(Dn qp) (Bj qp) (Fk qp) (Dn qp) (Bj qp) (Fk qp)]]
     (fingerboard headstock))
@@ -181,49 +205,77 @@
 
 
 ;; browse pagewise
+
 (defn compendium []
   (doseq [clave accidentals]
     (eadgbe clave)))
 
 
-;; menu layout
-(defn catalogue []
-  (prn)
-  (doseq [ndx (range (count accidentals))]
-    (if (zero? (mod (inc ndx) 7))
-      (println (str "\t" (nth accidentals ndx)))
-      (print (str "\t" (nth accidentals ndx)))))
-  (println "\n"))
-
+;; atrium entryway
 
 (defn -main [arguments]
   (when (= nil arguments)
-    (prn)
+    (newline)
     (compendium)
-    (catalogue)
+    (catalogue accidentals)
     (prn))
   (when (= clojure.lang.ArraySeq (type arguments))
     (cond
       (= "$" (first arguments))
         (do
-          (prn)
+          (newline)
           (compendium)
-          (prn)) 
+          (prn))
       (= "?" (first arguments))
         (do
-          (prn)
-          (catalogue)
+          (newline)
+          (catalogue accidentals)
+          (prn))
+      (= "j" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #"j\d*" accidentals))
+          (prn))
+      (= "jk" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #"j\d*k\d*" accidentals))
+          (prn))
+      (= "k" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #"k\d*" accidentals))
+          (prn))
+      (= "kj" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #"k\d*j\d*" accidentals))
+          (prn))
+      (= "n" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #"n.*" accidentals))
+          (prn))
+      (= "x" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #".*x\d*" accidentals))
+          (prn))
+      (= "y" (first arguments))
+        (do
+          (newline)
+          (catalogue (catahoula-cur #".*y\d*" accidentals))
           (prn))
       :otherwise
         (do
-          (prn)
+          (newline)
           (doseq [signat arguments]
             (if (contains? monograph signat)
               (eadgbe signat)
               (do
                 (if (< 1 (count arguments))
                   (printf "\n\t%s %s\n\n" signat "?")
-                  (catalogue)))))
+                  (catalogue accidentals)))))
           (prn)))))
 
 
